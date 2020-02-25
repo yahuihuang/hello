@@ -33,11 +33,11 @@ public class HelloController {
         ServiceInstance instance = client.getLocalServiceInstance();
         logger.info("/hello, host: " + instance.getHost() + ", service_id: " + instance.getServiceId());
         */
-        /*client.getServices().forEach(id -> {
+        client.getServices().forEach(id -> {
             client.getInstances(id).forEach(instance -> {
                 logger.info("/hello, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
             });
-        });*/
+        });
 
         return "Hello World!";
     }
