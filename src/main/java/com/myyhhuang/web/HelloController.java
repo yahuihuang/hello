@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -59,7 +61,7 @@ public class HelloController {
     private DiscoveryClient client;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public List<IMCounty> index() throws Exception {
+    public IMCountyList index() throws Exception {
         client.getServices().forEach(id -> {
             client.getInstances(id).forEach(instance -> {
                 logger.info("/hello, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
@@ -76,7 +78,7 @@ public class HelloController {
             logger.info("EncryptedDataSource decrypt db login password exception"+e);
         }*/
 
-
+/*暫時mark
         IMServiceEntry imServiceEntry = new IMServiceEntry();
         List<IMCounty> imCountyList = imServiceEntry.retriveIMCounty();
         if (imCountyList == null) {
@@ -87,8 +89,16 @@ public class HelloController {
             }
             return imCountyList;
         }
-        //return "Hello World!";
+
         return null;
+ */
+        IMCountyList imCountyList = new IMCountyList();
+        IMCounty imCounty1 = new IMCounty("A12345", "測試1", new Date(), "J1234567");
+        imCountyList.getImCounties().add(imCounty1);
+        IMCounty imCounty2 = new IMCounty("B12345", "測試2", new Date(), "J1234567");
+        imCountyList.getImCounties().add(imCounty2);
+
+        return imCountyList;
     }
 
 }
