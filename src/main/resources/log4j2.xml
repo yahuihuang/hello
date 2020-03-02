@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
+<Configuration monitorInterval="86400">
   <Properties>
     <Property name="log_path">D:/logs/hello</Property>
   </Properties>
@@ -24,7 +24,7 @@
         </RollingFile>
 
 	    <Routing name="Routing">
-	      <Routes pattern="$${ctx:className}">
+	      <Routes pattern="${ctx:className}">
 	        <Route>
 	          <RollingFile name="Rolling-${ctx:className}" fileName="${log_path}/dump-${ctx:className}.log"
 	                       filePattern="${log_path}/dump-${ctx:className}-%d{yyyy-MM-dd}-%i.log"

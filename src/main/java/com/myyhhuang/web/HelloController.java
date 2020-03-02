@@ -14,48 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Supplier;
 
 @SpringBootApplication
 ///@ImportResource("classpath:applicationContext.xml")
 @RestController
 public class HelloController {
     public static void main(String[] args) {
+        System.setProperty("className", "xxx");
         ApplicationContext applicationContext = SpringApplication.run(HelloController.class, args);
-
-        /*
-        String[] beanNames = applicationContext.getBeanDefinitionNames();
-        Arrays.sort(beanNames);
-
-        for (String name : beanNames) {
-            System.out.println(name);
-        }
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        HelloWorld obj = (HelloWorld) context.getBean("helloWorld");
-        obj.getMessage();
-
-        Properties properties = (Properties) context.getBean("dataSourceProperties");
-        System.out.println(properties);
-         */
     }
 
-/*
-    @RequestMapping("/hello")
-    public String index() {
-        return "Hello World";
-    }
-    */
-    //private final Logger logger = Logger.getLogger(String.valueOf(HelloController.class));
     private static Logger logger = LogManager.getLogger(HelloController.class.getName());
     static {
         ThreadContext.put("className", HelloController.class.getName());
     }
-
-    //@Autowired
-    //IMServiceDao IMServiceDao;
 
     @Autowired
     private DiscoveryClient client;
@@ -68,7 +41,27 @@ public class HelloController {
             });
         });
 
-        /*String sPassword = "";
+        IMServiceEntry imServiceEntry = new IMServiceEntry();
+        IMCountyList imCountyList = new IMCountyList();
+        List<IMCounty> imCountyListTmp = imServiceEntry.retriveIMCounty();
+        if (imCountyListTmp == null) {
+            logger.info("retriveIMCounty fail.");
+        } else {
+            for (IMCounty imCounty : imCountyListTmp) {
+                logger.info(imCounty.toString());
+            }
+        }
+        imCountyList.setImCounties(imCountyListTmp);
+
+        /*
+        IMCountyList imCountyList = new IMCountyList();
+        IMCounty imCounty1 = new IMCounty("A12345", "測試1", new Date(), "J1234567");
+        imCountyList.getImCounties().add(imCounty1);
+        IMCounty imCounty2 = new IMCounty("B12345", "測試2", new Date(), "J1234567");
+        imCountyList.getImCounties().add(imCounty2);
+        */
+        /*
+        String sPassword = "";
         try {
             DesUtil des = new DesUtil();
             sPassword = des.decrypt("99d48e6365c86d26d21ea0f0ac1458ef");
@@ -77,26 +70,6 @@ public class HelloController {
             e.printStackTrace();
             logger.info("EncryptedDataSource decrypt db login password exception"+e);
         }*/
-
-/*暫時mark
-        IMServiceEntry imServiceEntry = new IMServiceEntry();
-        List<IMCounty> imCountyList = imServiceEntry.retriveIMCounty();
-        if (imCountyList == null) {
-            logger.info("retriveIMCounty fail.");
-        } else {
-            for (IMCounty imCounty : imCountyList) {
-                logger.info(imCounty.toString());
-            }
-            return imCountyList;
-        }
-
-        return null;
- */
-        IMCountyList imCountyList = new IMCountyList();
-        IMCounty imCounty1 = new IMCounty("A12345", "測試1", new Date(), "J1234567");
-        imCountyList.getImCounties().add(imCounty1);
-        IMCounty imCounty2 = new IMCounty("B12345", "測試2", new Date(), "J1234567");
-        imCountyList.getImCounties().add(imCounty2);
 
         return imCountyList;
     }

@@ -16,4 +16,7 @@ public class IMCountyList {
     public List<IMCounty> getImCounties() {
         return imCounties;
     }
+    public void setImCounties(List<IMCounty> imCounties) {
+        this.imCounties = imCounties;
+    }
 }

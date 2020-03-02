@@ -1,6 +1,7 @@
 package com.myyhhuang.util;
 
 import java.util.Properties;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.ThreadContext;
@@ -32,13 +33,11 @@ public class PropertiesEncryptFactoryBean implements FactoryBean {
   
     public void setProperties(Properties inProperties) {
         this.properties = inProperties;
-        /*+++++++++++++
-        String originalPassword = properties.getProperty("password"); 
+        String originalPassword = properties.getProperty("password");
         if (originalPassword != null){  
             String newPassword = deEncryptPassword(originalPassword);  
             properties.put("password", newPassword);  
-        }  */
-        properties.put("password", "!pwd.168!");
+        }
     }   
       
     private String deEncryptPassword(String originalPassword){ 
