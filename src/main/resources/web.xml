@@ -50,11 +50,11 @@
   	<servlet>
 		<servlet-name>InitWebAppServlet</servlet-name>
         <servlet-class>com.myyhhuang.servlet.InitWebAppServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
 		<init-param>
             <param-name>configlist</param-name>
             <param-value>sysConfig</param-value>
         </init-param>
+		<load-on-startup>1</load-on-startup>
      </servlet>
 
      <servlet-mapping>
