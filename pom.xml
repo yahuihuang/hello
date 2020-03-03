@@ -76,10 +76,9 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
 		<!-- hibernate //-->
@@ -129,6 +128,13 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
 //-->
+		<!-- 繼承 //-->
+		<!--
+		<dependency>
+			<groupId>com.myyhhuang</groupId>
+			<artifactId>hello-service-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>//-->
 	</dependencies>
 
 

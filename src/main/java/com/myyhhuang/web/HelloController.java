@@ -9,11 +9,13 @@ import org.apache.logging.log4j.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 ///@ImportResource("classpath:applicationContext.xml")
@@ -74,7 +76,19 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/hello1", method = RequestMethod.GET)
-    public String hello(@RequestParam String name) {
+    public String hello(@RequestParam String name) throws InterruptedException {
+        client.getServices().forEach(id -> {
+            client.getInstances(id).forEach(instance -> {
+                logger.info("/hello, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
+            });
+        });
+
+        int sleepTime = new Random().nextInt(3000);
+        logger.info("sleepTime: " + sleepTime);
+        Thread.sleep(sleepTime);
+
+        //logger.info("/hello, host: " + instance.getHost() + ", service_id: " + instance.getServiceId());
+
         return "Hello " + name;
     }
 
